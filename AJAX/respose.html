@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="button"> Get text file</button>
+    <div id = "result"></div>
+
+    <script>
+    document.getElementById('button').addEventListener("click", loadtext);
+
+        function loadtext(){
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET","sample.txt",true);
+            
+            xhr.onload = function (){
+               // console.log("STATE :" + xhr.readyState);
+              // document.write(xhr.readyState + "\n");
+               if(this.status == 200){
+                document.getElementById("result").innerHTML = this.response;
+                }
+            }
+
+            xhr.send();
+        }
+</script> 
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .users{
+        display: flex;
+        background-color: #f4f4f4;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    .users li{
+        list-style: none;
+    }
+    </style>
+</head>
+<body>
+    <button id="button">click Me!</button><br><br>
+    <h1>Git Hub Users</h1>
+    <div id="users"></div>
+
+    <script>
+    document.getElementById('button').addEventListener("click",load);
+
+    function load(){
+       // console.log('clicked');
+       var xhr = new XMLHttpRequest();
+        xhr.open("GET","https://api.github.com/users",true);
+        xhr.onload = function(){
+            if(this.status == 200){
+                var users = JSON.parse(this.responseText);
+
+                var output = '';
+                for(var i in users){
+                output += 
+                '<div class="users">'+
+                '<img src = "'+users[i].avatar_url+'" width = "80px" height = "50px">'+
+                '<ul>'+
+                '<li> ID :'+users[i].id+'</li>'+
+                '<li> Login :'+users[i].login+'</li>'+
+                '</ul>'+
+                '</div>';                }
+            }
+            document.getElementById('users').innerHTML = output;
+        }
+        xhr.send();
+    }
+    </script>
+</body>
+</html>
